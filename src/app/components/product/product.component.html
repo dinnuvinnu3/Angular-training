@@ -1,0 +1,11 @@
+<p>product works!</p>
+
+<div>
+    <img [src]="data.productImage" alt="Image is not uploaded" />
+    <h4>{{ data.productName | uppercase }}</h4>
+    <h4>{{ data.productPrice | conversion:currencyCode | currency:currencyCode:"code"}}</h4>
+    <button *ngIf="data.productStock>0; else stock" (click)="notifyParent()">Add to cart</button>
+</div>
+<ng-template #stock>
+    Out of stock
+</ng-template>

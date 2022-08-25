@@ -1,0 +1,40 @@
+<button type="submit" (click)="onLoading()">Load</button>
+
+<button type="submit" (click)="patching()">Patch it</button>
+
+<input type="text" appNumbersOnly/>
+
+<form [formGroup]="checkoutForm" (submit)="submitedForm()">
+    <div>
+        <label>Name</label><br>
+        <input type="text" formControlName="name"/><br>
+        <div *ngIf="checkoutForm.get('name')?.touched">
+            <!-- ? : safe navigation operator -->
+            <small *ngIf="checkoutForm.get('name')?.hasError('required')">
+                Name is required.
+            </small>
+            <small *ngIf="checkoutForm.get('name')?.hasError('minlength')">
+                Minimum {{ checkoutForm.get("name")?.getError("minlength").requiredLength }}
+            </small>
+        </div>
+    </div>
+    <div>
+        <label>Email</label><br>
+        <input type="email" formControlName="email"/><br>
+        <div *ngIf="checkoutForm.get('email')?.touched">
+            <small *ngIf="checkoutForm.get('email')?.hasError('required')">Email required</small>
+            <small *ngIf="checkoutForm.get('email')?.hasError('pattern')">Invalid Pattern </small>
+        </div>
+    </div>
+    <div>
+        <label>Pincode</label><br>
+        <input type="text" formControlName="pincode"/><br>
+        <div *ngIf="checkoutForm.get('pincode')?.touched">
+            <small *ngIf="checkoutForm.get('pincode')?.hasError('required')">Pincode should enter</small>
+            <small *ngIf="checkoutForm.get('pincode')?.hasError('pinCode')">Invalid Pincode</small>
+        </div>
+    </div>
+    <button type="submit">Submit</button>
+</form>
+
+<!-- <pre>{{ checkoutForm.get('pincode')?.errors | json }}</pre> -->
